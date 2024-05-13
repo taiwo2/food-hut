@@ -88,7 +88,7 @@ const RestaurantDetails = ({ post }) => {
         <View className="flex flex-1 my-4 mr-8">
           <Text className="text-base">{item.name}</Text>
           <Text className="text-sm text-[#6e6d72]">{item.info}</Text>
-          <Text className="">{item.price} €</Text>
+          <Text className="">£ {item.price}</Text>
         </View>
         <Image
           source={{ uri: item.img }}

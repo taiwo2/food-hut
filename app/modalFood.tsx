@@ -35,7 +35,7 @@ const ModalFood = () => {
           <Text>+</Text>
         </View>
         <TouchableOpacity className="bg-[#34BB78] w-56 rounded-full items-center justify-center">
-          <Text className="text-white">Add €3.00</Text>
+          <Text className="text-white">Add £3.00</Text>
         </TouchableOpacity>
       </View>
     </View>
