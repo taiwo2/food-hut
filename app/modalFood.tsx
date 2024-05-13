@@ -1,8 +1,9 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
-import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+
+import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 
 const ModalFood = () => {
   const { id, itemId } = useLocalSearchParams();

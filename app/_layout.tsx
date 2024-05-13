@@ -22,11 +22,19 @@ export default function RootLayout() {
             <TouchableOpacity
               style={{ backgroundColor: '#fff', borderRadius: 20, padding: 2 }}
               onPress={() => navigation.goBack()}>
-              <Ionicons name="close-outline" size={30} color={'#5a5a5a'} />
+              <Ionicons name="close-outline" size={30} color="#5a5a5a" />
             </TouchableOpacity>
           ),
         }}
       />
+      <Stack.Screen
+          name="modalAddress"
+          options={{
+            presentation: 'modal',
+            title: 'Delivery address',
+            headerShown: false,
+          }}
+        />
     </Stack>
   );
 }

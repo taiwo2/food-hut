@@ -1,25 +1,29 @@
-import { View, Text, SafeAreaView, FlatList } from 'react-native';
-import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import MarketCard from '~/components/marketCard';
+import React from 'react';
+import { View, Text, SafeAreaView, FlatList } from 'react-native';
+
 import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
+import MarketCard from '~/components/marketCard';
 
 const HomeScreen = () => {
   return (
     <SafeAreaView className={styles.container}>
-      <View className={styles.header}>
-        <View className={styles.addressContainer}>
-          <MaterialCommunityIcons name="map-marker-outline" size={28} color={'black'} />
-          <Text className={styles.addressText}>Your Address Here</Text>
-        </View>
-      </View>
-
       <FlatList
         data={dummyRestaurantsData}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         ListHeaderComponent={() => (
-          <Text className={styles.cardTitle}>All Restaurants And Stores</Text>
+          <>
+           <Link href="/modalAddress" asChild>
+            <View className={styles.header}>
+              <View className={styles.addressContainer}>
+                <MaterialCommunityIcons name="map-marker-outline" size={28} color="black" />
+                <Text className={styles.addressText}>Your Address Here</Text>
+              </View>
+            </View>
+            <Text className={styles.cardTitle}>All Restaurants And Stores</Text>
+            </Link>
+          </>
         )}
         renderItem={({ item }) => <MarketCard restaurantData={item} />}
       />

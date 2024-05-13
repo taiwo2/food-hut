@@ -1,3 +1,6 @@
+import { AntDesign, FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { Link, useGlobalSearchParams, useNavigation } from 'expo-router';
+import React, { useLayoutEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,11 +11,9 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import React, { useLayoutEffect, useState } from 'react';
-import ParallaxScrollView from '../components/ParallaxScrollView.js';
-import { AntDesign, FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
-import { Link, useGlobalSearchParams, useNavigation } from 'expo-router';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import ParallaxScrollView from '../components/ParallaxScrollView.js';
 
 const RestaurantDetails = ({ post }) => {
   const { id } = useGlobalSearchParams();
@@ -51,7 +52,7 @@ const RestaurantDetails = ({ post }) => {
     }
   };
 
-  const selectCategory = (index: Number) => {
+  const selectCategory = (index: number) => {
     setActiveButtonIndex(index);
   };
 
@@ -83,7 +84,7 @@ const RestaurantDetails = ({ post }) => {
   }, [headerIconColor]);
 
   const renderItem: ListRenderItem<any> = ({ item, index }) => (
-    <Link href={{ pathname: '/modalFood', params: { id: id, itemId: item.id } }} asChild>
+    <Link href={{ pathname: '/modalFood', params: { id, itemId: item.id } }} asChild>
       <TouchableOpacity className={styles.itemContainer}>
         <View className="flex flex-1 my-4 mr-8">
           <Text className="text-base">{item.name}</Text>
@@ -140,7 +141,7 @@ const RestaurantDetails = ({ post }) => {
             </View>
 
             <View className={styles.deliveryTextsContainer}>
-              <Ionicons name="bicycle" size={18} color={'black'} />
+              <Ionicons name="bicycle" size={18} color="black" />
               <Text className={styles.deliveryTexts}>Delivery</Text>
               <Text>・</Text>
               <FontAwesome5 name="walking" size={15} color="black" />

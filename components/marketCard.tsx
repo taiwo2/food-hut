@@ -1,8 +1,9 @@
-import { View, Text, Pressable, Image } from 'react-native';
-import React from 'react';
-import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link } from 'expo-router';
+import React from 'react';
+import { View, Text, Pressable, Image } from 'react-native';
+
+import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 
 const MarketCard = ({ restaurantData }) => {
   const ratingStyle = {
