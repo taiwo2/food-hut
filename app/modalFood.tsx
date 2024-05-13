@@ -19,7 +19,7 @@ const ModalFood = () => {
         <Image source={{ uri: foundMeals?.img }} resizeMode="contain" className="w-full h-72" />
         <View className="p-5">
           <Text className="text-2xl font-bold">{foundMeals?.name}</Text>
-          <Text className="text-base font-[#6e6d72] my-2">{foundMeals?.price} €</Text>
+          <Text className="text-base font-[#6e6d72] my-2">£{foundMeals?.price}</Text>
           <Text className="text-base font-[#6f707c]">{foundMeals?.info}</Text>
         </View>
       </View>
