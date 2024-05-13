@@ -27,10 +27,10 @@ const MarketCard = ({ restaurantData }) => {
           <Text className={styles.restaurantName}>{restaurantData.name}</Text>
           <View className={styles.ratingContainer}>
             <FontAwesome name="star" size={17} color={ratingStyle.color} />
-            <Text className={styles.rating}>{restaurantData.rating}</Text>
+            <Text className={styles.rating}>£ {restaurantData.rating}</Text>
           </View>
         </View>
-        <Text className={styles.price}>{restaurantData.price} €</Text>
+        <Text className={styles.price}>{restaurantData.price}</Text>
       </Pressable>
     </Link>
   );

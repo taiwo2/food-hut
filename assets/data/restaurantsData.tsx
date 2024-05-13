@@ -6,7 +6,7 @@ const dummyRestaurantsData = [
     price: 3,
     distance: '0.85',
     delivery: '10-20',
-    profileImage: 'https://x7d4c5z5.stackpathcdn.com/wp-content/uploads/tc/2021/03/og-img.jpg',
+    profileImage: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     about: 'Your go-to place for quick and tasty meals delivered right to your doorstep.',
     food: [
       {
