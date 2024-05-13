@@ -1,4 +1,4 @@
-## Food-Hut react-native app
+# Food-Hut react-native app
 
 * ![food](./assets/foodq.jpeg)
 
