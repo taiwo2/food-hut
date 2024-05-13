@@ -14,7 +14,7 @@ const dummyRestaurantsData = [
         meals: [
           {
             id: 1,
-            name: 'Bolt Special Combo',
+            name: 'Riley Special Combo',
             price: 12.99,
             info: 'Includes one main item, one side, and one drink.',
             img: 'https://www.borenos.com/wp-content/uploads/2018/11/5-person-combo-1.png',
