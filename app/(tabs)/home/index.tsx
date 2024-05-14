@@ -16,6 +16,7 @@ const HomeScreen = () => {
     const streetName = address.split(',')[0].trim();
     setStreet(streetName);
   }, [route.params?.address, setStreet]);
+
   return (
     <SafeAreaView className={styles.container}>
       <FlatList
