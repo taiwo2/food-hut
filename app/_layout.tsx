@@ -1,11 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useNavigation } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
+import { AppProvider } from '~/context/appContext';
 
 export default function RootLayout() {
   const navigation = useNavigation();
 
   return (
+    <AppProvider>
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
@@ -36,5 +38,6 @@ export default function RootLayout() {
           }}
         />
     </Stack>
+    </AppProvider>
   );
 }

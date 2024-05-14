@@ -1,11 +1,21 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { View, Text, SafeAreaView, FlatList } from 'react-native';
-
+import { useRoute } from '@react-navigation/native';
+import { useAppContext } from '~/context/appContext';
+import { useEffect } from 'react';
 import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 import MarketCard from '~/components/marketCard';
 
 const HomeScreen = () => {
+  const route = useRoute();
+  const { streetName, setStreet } = useAppContext();
+  
+  useEffect(() => {
+    const address = route.params?.address || 'Your address here';
+    const streetName = address.split(',')[0].trim();
+    setStreet(streetName);
+  }, [route.params?.address, setStreet]);
   return (
     <SafeAreaView className={styles.container}>
       <FlatList
