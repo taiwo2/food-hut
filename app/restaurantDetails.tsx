@@ -1,6 +1,6 @@
 import { AntDesign, FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { Link, useGlobalSearchParams, useNavigation } from 'expo-router';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -14,13 +14,16 @@ import {
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import ParallaxScrollView from '../components/ParallaxScrollView.js';
+import { useAppContext } from '~/context/appContext.js';
 
 const RestaurantDetails = ({ post }) => {
   const { id } = useGlobalSearchParams();
-
+  const navigation = useNavigation();
+  const { foundMeals, count, totalPrice } = useAppContext();
   const [headerIconColor, setHeaderIconColor] = useState('white');
   const [activeButtonIndex, setActiveButtonIndex] = useState(0);
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const [showButton, setShowButton] = useState(false);
 
   const navigation = useNavigation();
 
@@ -85,9 +88,19 @@ const RestaurantDetails = ({ post }) => {
 
   const renderItem: ListRenderItem<any> = ({ item, index }) => (
     <Link href={{ pathname: '/modalFood', params: { id, itemId: item.id } }} asChild>
-      <TouchableOpacity className={styles.itemContainer}>
-        <View className="flex flex-1 my-4 mr-8">
-          <Text className="text-base">{item.name}</Text>
+      <TouchableOpacity className={`${styles.itemContainer}
+      ${count >= 1 && foundMeals?.id === item.id ? styles.greenBorder : ''
+      }`}>
+         <View className="flex flex-1 justify-center my-6 mr-8 ml-6">
+        <View className="flex flex-row items-center">
+            {count >= 1 && foundMeals?.id === item.id && (
+              <View className="bg-[#34BB78] items-center w-6 h-7 rounded-md mr-2">
+                <Text className="text-lg text-white font-semibold">{count}</Text>
+              </View>
+            )}
+            <Text className="text-base">{item.name}</Text>
+          </View>
+
           <Text className="text-sm text-[#6e6d72]">{item.info}</Text>
           <Text className="">£{item.price}</Text>
         </View>
@@ -108,6 +121,10 @@ const RestaurantDetails = ({ post }) => {
     index,
   }));
 
+  useEffect(() => {
+    setShowButton(totalPrice > 0);
+  }, [totalPrice]);
+  
   return (
     <>
       <ParallaxScrollView
@@ -208,6 +225,16 @@ const RestaurantDetails = ({ post }) => {
           </ScrollView>
         </View>
       </Animated.View>
+
+      {showButton && (
+        <Link href={'/basketScreen'} asChild>
+          <TouchableOpacity className="pt-4 pb-8 bg-white border-t border-gray-200">
+            <View className="bg-[#34BB78] py-3 mx-7 rounded-full font-bold items-center">
+              <Text className="text-white font-bold text-lg">View basket {totalPrice} €</Text>
+            </View>
+          </TouchableOpacity>
+        </Link>
+      )}
     </>
   );
 };
@@ -234,6 +261,7 @@ const styles = {
   styckyButton: 'px-2 py-1',
   stickyButtonTextActive: 'font-bold text-base',
   styckyTextButton: 'text-base',
+  greenBorder: 'border-l-8 border-[#34BB78]',
 };
 
 const cStyles = StyleSheet.create({

@@ -1,36 +1,65 @@
-import { useLocalSearchParams } from 'expo-router';
-import React, { useState } from 'react';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
+import { useAppContext } from '~/context/appContext';
 
 const ModalFood = () => {
   const { id, itemId } = useLocalSearchParams();
-  const restaurantById = dummyRestaurantsData?.find((r) => r?.id === id);
-  const meals = restaurantById?.food.flatMap((c) => c.meals);
-  const foundMeals = meals?.find((m) => m.id === +itemId);
-  //   console.log(foundMeals);
-
+  const navigation = useNavigation();
+  const [restaurantById, setRestaurantById] = useState(null);
+  const [foundMeals, setFoundMeals] = useState(null);
+  const [meals, setMeals] = useState([]);
+  const { setFoodData, count, setCount } = useAppContext();
+  const [totalPrice, setTotalPrice] = useState(0);
   const [note, setNote] = useState('');
-  const [count, setCount] = useState(1)
-  const [totalPrice, setTotalPrice] = useState(foundMeals?.price);
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const restaurantData = dummyRestaurantsData?.find((r) => r?.id === id);
+      setRestaurantById(restaurantData);
+
+      if (restaurantData) {
+        const allMeals = restaurantData?.food.flatMap((c) => c.meals);
+        setMeals(allMeals);
+
+        const foundMeal = allMeals?.find((m) => m.id === +itemId);
+        setFoundMeals(foundMeal);
+
+        if (foundMeal) {
+          setTotalPrice(foundMeal.price);
+        }
+      }
+    };
+
+    fetchData();
+  }, [id, itemId]);
+
+  useEffect(() => {
+    if (foundMeals) {
+      setTotalPrice(foundMeals.price * count);
+    }
+  }, [foundMeals, count]);
 
   // Items count
 
   const incrementCount = () => {
     setCount(count + 1);
-    setTotalPrice(totalprice + foundMeals?.price)
   };
 
   const decrementCount = () => {
     if (count > 1) {
       setCount(count - 1);
-      setTotalPrice(totalprice - foundMeals?.price)
     }
   };
 
+  const goBackAndSetFoodData = () => {
+    setFoodData({ totalPrice, restaurantById, meals, foundMeals, count });
+    navigation.goBack();
+  };
   
 
   return (
@@ -66,7 +95,8 @@ const ModalFood = () => {
             <Text className="text-2xl">+</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity className="bg-[#34BB78] w-56 rounded-full items-center justify-center">
+        <TouchableOpacity className="bg-[#34BB78] w-56 rounded-full items-center justify-center"
+        onPress={goBackAndSetFoodData}>
           <Text className="text-white">Add £{totalPrice?.toFixed(2)}</Text>
         </TouchableOpacity>
       </View>

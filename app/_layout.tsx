@@ -37,6 +37,14 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
+
+        <Stack.Screen
+          name="restaurantDetails"
+          options={{
+            title: '',
+            headerShown: false,
+          }}
+        />
     </Stack>
     </AppProvider>
   );

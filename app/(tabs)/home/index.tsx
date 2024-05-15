@@ -1,9 +1,10 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
-import { View, Text, SafeAreaView, FlatList } from 'react-native';
+import { View, Text, SafeAreaView, FlatList,TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useAppContext } from '~/context/appContext';
 import { useEffect } from 'react';
+import { Link } from 'expo-router';
 import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 import MarketCard from '~/components/marketCard';
 
@@ -25,15 +26,16 @@ const HomeScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         ListHeaderComponent={() => (
           <>
-           <Link href="/modalAddress" asChild>
-            <View className={styles.header}>
+           <Link href="/modalAddress" AsChild>
+            <TouchableOpacity className={styles.header}>
               <View className={styles.addressContainer}>
                 <MaterialCommunityIcons name="map-marker-outline" size={28} color="black" />
-                <Text className={styles.addressText}>Your Address Here</Text>
+                <Text className={styles.addressText}>{streetName}</Text>
               </View>
-            </View>
-            <Text className={styles.cardTitle}>All Restaurants And Stores</Text>
+            </TouchableOpacity>
+            
             </Link>
+            <Text className={styles.cardTitle}>All Restaurants And Stores</Text>
           </>
         )}
         renderItem={({ item }) => <MarketCard restaurantData={item} />}
@@ -48,6 +50,8 @@ const styles = {
   addressContainer: 'flex-row items-center',
   addressText: 'ml-2',
   cardTitle: 'mt-4 mb-2 text-lg font-bold',
+  cardContainer: 'mt-4',
+  cardImage: 'w-full h-200 rounded-lg',
 };
 
 export default HomeScreen;
