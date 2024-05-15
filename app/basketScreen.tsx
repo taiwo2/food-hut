@@ -46,7 +46,7 @@ const renderItem = ({ item }) => (
     </View>
 
     <View>
-      <Text className="text-sm text-gray-700">{item.price} €</Text>
+      <Text className="text-sm text-gray-700">£{item.price}</Text>
       <Text className="text-sm text-gray-700">{item.title}</Text>
     </View>
   </View>
@@ -121,7 +121,7 @@ const BasketScreen = () => {
             />
             <View>
               <Text className="text-lg text-gray-800">{foundMeals.name}</Text>
-              <Text className="text-base font-bold">{totalPrice} €</Text>
+              <Text className="text-base font-bold">£{totalPrice}</Text>
             </View>
           </View>
 
@@ -177,6 +177,57 @@ const BasketScreen = () => {
             keyExtractor={(item) => item.id}
           />
         </View>
+      </View>
+
+      {/* Delivery or Pickup */}
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2">
+      </View>
+
+      {/* Pricing Component */}
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2">
+      </View>
+
+      {/* Map View */}
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2 flex-1">
+      </View>
+
+      {/* Place Order */}
+      <View className="flex rounded-2xl bg-white py-6 mt-2 flex-1">
+        {/* Total */}
+        <View className="flex flex-row items-center justify-between mb-2 px-4">
+          <View className="flex flex-row items-center">
+            <Text className="text-lg mr-1 font-bold">Total</Text>
+          </View>
+          <Text className="text-lg font-bold">£{totalPrice}</Text>
+        </View>
+
+        {/* Cash row */}
+        <View className="flex flex-row items-center justify-between mb-2 px-4 mt-2">
+          <View className="flex flex-row items-center">
+            <FontAwesome5 name="money-bill-wave-alt" size={24} color="#34BB78" />
+            <View className="flex flex-col ml-2">
+              <Text className="text-base">Cash</Text>
+              <Text className="text-base text-[#34BB78]">Change</Text>
+            </View>
+          </View>
+          <Text className="text-base">£{totalPrice}</Text>
+        </View>
+
+        {/* Cash warning */}
+        <View className="flex flex-row items-center mb-2 px-4 mt-2">
+         
+          <Text className="ml-2 text-base">
+            <Text>Cash order</Text>
+            <FontAwesome5 name="exclamation-triangle" size={18} color="#fcb001" />
+            <Text>I accept that courier may not have change</Text>
+            <FontAwesome5 name="exclamation-triangle" size={18} color="#fcb001" />
+          </Text>
+        </View>
+
+        {/* Separator */}
+        <View className="border-[0.5px] border-slate-200 my-4" />
+
+       
       </View>
     </ScrollView>
   );
