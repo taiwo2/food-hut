@@ -1,9 +1,9 @@
-import { View, Text, TouchableOpacity, Image, TextInput, FlatList, ScrollView } from 'react-native';
-import React, { useLayoutEffect, useState } from 'react';
-import { useAppContext } from '~/context/appContext';
-import { useNavigation } from 'expo-router';
 import { AntDesign, FontAwesome5, Ionicons } from '@expo/vector-icons';
-
+import { useNavigation } from 'expo-router';
+import React, { useLayoutEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, TextInput, FlatList, ScrollView } from 'react-native';
+import DeliveryOptions from '~/components/deliveryOptions';
+import { useAppContext } from '~/context/appContext';
 
 const sauceData = [
   {
@@ -158,7 +158,7 @@ const BasketScreen = () => {
         {/* Leave Comment */}
         <View>
           <TextInput
-            multiline={true}
+            multiline
             placeholder={'Need cutlery ? Napkins ? Other ? \nLeave a comment...'}
           />
         </View>
@@ -180,16 +180,13 @@ const BasketScreen = () => {
       </View>
 
       {/* Delivery or Pickup */}
-      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2">
-      </View>
-
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2" />
+        <DeliveryOptions restaurantById={restaurantById} />
       {/* Pricing Component */}
-      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2">
-      </View>
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2" />
 
       {/* Map View */}
-      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2 flex-1">
-      </View>
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2 flex-1" />
 
       {/* Place Order */}
       <View className="flex rounded-2xl bg-white py-6 mt-2 flex-1">
@@ -215,7 +212,6 @@ const BasketScreen = () => {
 
         {/* Cash warning */}
         <View className="flex flex-row items-center mb-2 px-4 mt-2">
-         
           <Text className="ml-2 text-base">
             <Text>Cash order</Text>
             <FontAwesome5 name="exclamation-triangle" size={18} color="#fcb001" />
@@ -226,8 +222,6 @@ const BasketScreen = () => {
 
         {/* Separator */}
         <View className="border-[0.5px] border-slate-200 my-4" />
-
-       
       </View>
     </ScrollView>
   );

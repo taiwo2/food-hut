@@ -1,17 +1,17 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React from 'react';
-import { View, Text, SafeAreaView, FlatList,TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { useAppContext } from '~/context/appContext';
-import { useEffect } from 'react';
 import { Link } from 'expo-router';
+import React, { useEffect } from 'react';
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+
 import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 import MarketCard from '~/components/marketCard';
+import { useAppContext } from '~/context/appContext';
 
 const HomeScreen = () => {
   const route = useRoute();
   const { streetName, setStreet } = useAppContext();
-  
+
   useEffect(() => {
     const address = route.params?.address || 'Your address here';
     const streetName = address.split(',')[0].trim();
@@ -26,14 +26,13 @@ const HomeScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         ListHeaderComponent={() => (
           <>
-           <Link href="/modalAddress" AsChild>
-            <TouchableOpacity className={styles.header}>
-              <View className={styles.addressContainer}>
-                <MaterialCommunityIcons name="map-marker-outline" size={28} color="black" />
-                <Text className={styles.addressText}>{streetName}</Text>
-              </View>
-            </TouchableOpacity>
-            
+            <Link href="/modalAddress" AsChild>
+              <TouchableOpacity className={styles.header}>
+                <View className={styles.addressContainer}>
+                  <MaterialCommunityIcons name="map-marker-outline" size={28} color="black" />
+                  <Text className={styles.addressText}>{streetName}</Text>
+                </View>
+              </TouchableOpacity>
             </Link>
             <Text className={styles.cardTitle}>All Restaurants And Stores</Text>
           </>

@@ -13,12 +13,12 @@ import {
 } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import ParallaxScrollView from '../components/ParallaxScrollView.js';
-import { useAppContext } from '~/context/appContext.js';
+import ParallaxScrollView from '../components/ParallaxScrollView';
+import { useAppContext } from '~/context/appContext';
+
 
 const RestaurantDetails = ({ post }) => {
   const { id } = useGlobalSearchParams();
-  const navigation = useNavigation();
   const { foundMeals, count, totalPrice } = useAppContext();
   const [headerIconColor, setHeaderIconColor] = useState('white');
   const [activeButtonIndex, setActiveButtonIndex] = useState(0);
@@ -88,11 +88,11 @@ const RestaurantDetails = ({ post }) => {
 
   const renderItem: ListRenderItem<any> = ({ item, index }) => (
     <Link href={{ pathname: '/modalFood', params: { id, itemId: item.id } }} asChild>
-      <TouchableOpacity className={`${styles.itemContainer}
-      ${count >= 1 && foundMeals?.id === item.id ? styles.greenBorder : ''
-      }`}>
-         <View className="flex flex-1 justify-center my-6 mr-8 ml-6">
-        <View className="flex flex-row items-center">
+      <TouchableOpacity
+        className={`${styles.itemContainer}
+      ${count >= 1 && foundMeals?.id === item.id ? styles.greenBorder : ''}`}>
+        <View className="flex flex-1 justify-center my-6 mr-8 ml-6">
+          <View className="flex flex-row items-center">
             {count >= 1 && foundMeals?.id === item.id && (
               <View className="bg-[#34BB78] items-center w-6 h-7 rounded-md mr-2">
                 <Text className="text-lg text-white font-semibold">{count}</Text>
@@ -103,7 +103,7 @@ const RestaurantDetails = ({ post }) => {
 
           <Text className="text-sm text-[#6e6d72]">{item.info}</Text>
           <Text className="">£{item.price}</Text>
-        </View>
+        </View> 
         <Image
           source={{ uri: item.img }}
           width={100}
@@ -124,7 +124,7 @@ const RestaurantDetails = ({ post }) => {
   useEffect(() => {
     setShowButton(totalPrice > 0);
   }, [totalPrice]);
-  
+
   return (
     <>
       <ParallaxScrollView
@@ -227,10 +227,10 @@ const RestaurantDetails = ({ post }) => {
       </Animated.View>
 
       {showButton && (
-        <Link href={'/basketScreen'} asChild>
+        <Link href="/basketScreen" asChild>
           <TouchableOpacity className="pt-4 pb-8 bg-white border-t border-gray-200">
             <View className="bg-[#34BB78] py-3 mx-7 rounded-full font-bold items-center">
-              <Text className="text-white font-bold text-lg">View basket {totalPrice} €</Text>
+              <Text className="text-white font-bold text-lg">View basket £{totalPrice}</Text>
             </View>
           </TouchableOpacity>
         </Link>

@@ -1,8 +1,9 @@
-import { View, Text, Animated, TouchableOpacity, StyleSheet } from 'react-native';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Link, router, useNavigation } from 'expo-router';
 import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
+import { Link, router, useNavigation } from 'expo-router';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { View, Text, Animated, TouchableOpacity, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 import { useAppContext } from '~/context/appContext';
 
 const ModalAddress = () => {
@@ -108,7 +109,7 @@ const ModalAddress = () => {
       <View style={styles.textContainer}>
         <Link href="/(tabs)/home" asChild>
           <TouchableOpacity style={styles.closeButton}>
-            <Ionicons name="close-outline" size={30} color={'#161616'} />
+            <Ionicons name="close-outline" size={30} color="#161616" />
           </TouchableOpacity>
         </Link>
         <View style={styles.deliveryText}>

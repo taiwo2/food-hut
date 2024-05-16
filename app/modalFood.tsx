@@ -16,7 +16,6 @@ const ModalFood = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [note, setNote] = useState('');
 
-
   useEffect(() => {
     const fetchData = async () => {
       const restaurantData = dummyRestaurantsData?.find((r) => r?.id === id);
@@ -60,7 +59,6 @@ const ModalFood = () => {
     setFoodData({ totalPrice, restaurantById, meals, foundMeals, count });
     navigation.goBack();
   };
-  
 
   return (
     <View className={styles.container}>
@@ -77,9 +75,8 @@ const ModalFood = () => {
         <TextInput placeholder="Add a note" value={note} onChangeText={setNote} />
       </View>
 
-      
       <View className="flex flex-row bg-white mt-1 p-4 mb-auto justify-between">
-      <View className="flex flex-row justify-evenly border h-12 w-28 items-center rounded-full">
+        <View className="flex flex-row justify-evenly border h-12 w-28 items-center rounded-full">
           {count > 1 ? (
             <TouchableOpacity onPress={decrementCount}>
               <Text className="text-2xl text-black">—</Text>
@@ -95,8 +92,9 @@ const ModalFood = () => {
             <Text className="text-2xl">+</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity className="bg-[#34BB78] w-56 rounded-full items-center justify-center"
-        onPress={goBackAndSetFoodData}>
+        <TouchableOpacity
+          className="bg-[#34BB78] w-56 rounded-full items-center justify-center"
+          onPress={goBackAndSetFoodData}>
           <Text className="text-white">Add £{totalPrice?.toFixed(2)}</Text>
         </TouchableOpacity>
       </View>
