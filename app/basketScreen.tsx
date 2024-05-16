@@ -3,6 +3,7 @@ import { useNavigation } from 'expo-router';
 import React, { useLayoutEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, FlatList, ScrollView } from 'react-native';
 import DeliveryOptions from '~/components/deliveryOptions';
+import PricingComponent from '~/components/pricingComponent';
 import { useAppContext } from '~/context/appContext';
 
 const sauceData = [
@@ -180,11 +181,13 @@ const BasketScreen = () => {
       </View>
 
       {/* Delivery or Pickup */}
-      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2" />
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2" >
         <DeliveryOptions restaurantById={restaurantById} />
+      </View>
       {/* Pricing Component */}
-      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2" />
-
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2" >
+      <PricingComponent totalPrice={totalPrice} />
+      </View>
       {/* Map View */}
       <View className="flex rounded-2xl bg-white px-4 py-6 mt-2 flex-1" />
 
