@@ -2,9 +2,11 @@ import { AntDesign, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from 'expo-router';
 import React, { useLayoutEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, FlatList, ScrollView } from 'react-native';
-import DeliveryOptions from '~/components/deliveryOptions';
-import PricingComponent from '~/components/pricingComponent';
+
 import { useAppContext } from '~/context/appContext';
+import ItemsList from '~/components/ItemsList';
+import Checkbox from 'expo-checkbox';
+
 
 const sauceData = [
   {
@@ -111,73 +113,10 @@ const BasketScreen = () => {
 
   return (
     <ScrollView className="flex flex-1 bg-[#ecedef]">
+      {/* Item List View */}
       <View className="flex rounded-b-2xl bg-white px-4 py-6">
-        {/* Item */}
-        <View className="flex flex-row justify-between items-center">
-          <View className="flex flex-row">
-            <Image
-              source={{ uri: foundMeals.img }}
-              className="w-14 h-14 mr-2"
-              resizeMode="contain"
-            />
-            <View>
-              <Text className="text-lg text-gray-800">{foundMeals.name}</Text>
-              <Text className="text-base font-bold">£{totalPrice}</Text>
-            </View>
-          </View>
-
-          <View className="flex flex-row justify-evenly border h-10 w-24 items-center rounded-full">
-            {count > 1 ? (
-              <TouchableOpacity onPress={decrementCount}>
-                <Text className="text-2xl text-black">—</Text>
-              </TouchableOpacity>
-            ) : (
-              <View>
-                <Text className="text-2xl text-gray-500">—</Text>
-              </View>
-            )}
-
-            <Text className="text-lg">{count}</Text>
-            <TouchableOpacity onPress={incrementCount}>
-              <Text className="text-2xl">+</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Separator */}
-        <View className="border-[0.5px] border-slate-200 my-4" />
-
-        {/* Add More */}
-        <View className="flex flex-row items-center">
-          <AntDesign name="pluscircle" size={24} color="#34bb78" />
-          <Text className="text-[#34bb78] text-base font-semibold ml-4">Add more</Text>
-        </View>
-
-        {/* Separator */}
-        <View className="border-[0.5px] border-slate-200 my-4" />
-
-        {/* Leave Comment */}
-        <View>
-          <TextInput
-            multiline
-            placeholder={'Need cutlery ? Napkins ? Other ? \nLeave a comment...'}
-          />
-        </View>
-
-        {/* Separator */}
-        <View className="border-[0.5px] border-slate-200 my-4" />
-
-        {/* People also added */}
-        <View>
-          <Text className="text-lg font-bold mb-4">People also added</Text>
-          <FlatList
-            data={sauceData}
-            renderItem={renderItem}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item) => item.id}
-          />
-        </View>
+      <ItemsList decrementCount={decrementCount}foundMeals={foundMeals}totalPrice={totalPrice}
+      count={count} incrementCount={incrementCount} />
       </View>
 
       {/* Delivery or Pickup */}
@@ -189,8 +128,9 @@ const BasketScreen = () => {
       <PricingComponent totalPrice={totalPrice} />
       </View>
       {/* Map View */}
-      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2 flex-1" />
-
+      <View className="flex rounded-2xl bg-white px-4 py-6 mt-2 flex-1">
+      <MapViewComponent streetName={streetName} latitude={latitude} longitude={longitude} />
+      </View>
       {/* Place Order */}
       <View className="flex rounded-2xl bg-white py-6 mt-2 flex-1">
         {/* Total */}
@@ -215,6 +155,11 @@ const BasketScreen = () => {
 
         {/* Cash warning */}
         <View className="flex flex-row items-center mb-2 px-4 mt-2">
+        <Checkbox
+            value={isChecked}
+            onValueChange={setChecked}
+            color={isChecked ? '#34BB78' : undefined}
+          />
           <Text className="ml-2 text-base">
             <Text>Cash order</Text>
             <FontAwesome5 name="exclamation-triangle" size={18} color="#fcb001" />
