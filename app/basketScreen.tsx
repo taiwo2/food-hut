@@ -1,11 +1,15 @@
 import { AntDesign, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import Checkbox from 'expo-checkbox';
 import { useNavigation } from 'expo-router';
 import React, { useLayoutEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, FlatList, ScrollView } from 'react-native';
 
 import { useAppContext } from '~/context/appContext';
 import ItemsList from '~/components/ItemsList';
-import Checkbox from 'expo-checkbox';
+import DeliveryOptions from '~/components/DeliveryOptions';
+import PricingComponent from '~/components/PricingComponent';
+import MapViewComponent from '~/components/MapViewComponent';
+import SwipeButtonComponent from '~/components/swipeButtonComponent';
 
 
 const sauceData = [
@@ -169,7 +173,9 @@ const BasketScreen = () => {
         </View>
 
         {/* Separator */}
-        <View className="border-[0.5px] border-slate-200 my-4" />
+        <View className="border-[0.5px] border-slate-200 my-4">
+          <SwipeButtonComponent />
+        </View>
       </View>
     </ScrollView>
   );
