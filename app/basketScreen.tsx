@@ -9,7 +9,7 @@ import ItemsList from '~/components/ItemsList';
 import DeliveryOptions from '~/components/DeliveryOptions';
 import PricingComponent from '~/components/PricingComponent';
 import MapViewComponent from '~/components/MapViewComponent';
-import SwipeButtonComponent from '~/components/swipeButtonComponent';
+import SwipeButtonComponent from '~/components/swipeButton';
 
 
 const sauceData = [

@@ -1,8 +1,9 @@
-import { View, Text } from 'react-native';
+import { View} from 'react-native';
 import React, { useMemo } from 'react';
 import { useAppContext } from '~/context/appContext';
 import MapView, { Marker } from 'react-native-maps';
 import { AntDesign, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import BottomSheetComponent from '~/components/bottomSheetComponent';
 
 const OrderTracking = () => {
   const { coordinates } = useAppContext();
@@ -56,16 +57,7 @@ const OrderTracking = () => {
       </MapView>
 
       {/* Bottom Sheet */}
-      <BottomSheet index={0} snapPoints={snapPoints}>
-        <View className="flex flex-1 px-6 mt-2">
-          {/* 1 row Time */}
-          <View className="flex flex-row justify-between items-center">
-            <Text className="text-5xl text-black">
-             Hello Taiwo
-            </Text>
-          </View>
-          </View>
-          <ButtomSheet />
+      <BottomSheetComponent />
     </View>
   );
 };
