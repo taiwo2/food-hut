@@ -5,7 +5,6 @@ import React, { useLayoutEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, FlatList, ScrollView } from 'react-native';
 
 import { useAppContext } from '~/context/appContext';
-import ItemsList from '~/components/ItemsList';
 import DeliveryOptions from '~/components/DeliveryOptions';
 import PricingComponent from '~/components/PricingComponent';
 import MapViewComponent from '~/components/MapViewComponent';
@@ -79,24 +78,24 @@ const BasketScreen = () => {
   // console.log('latitdue: ', latitude);
   // console.log('longitude: ', longitude);
 
-  useLayoutEffect(() => {
-    if (restaurantById && restaurantById.name) {
-      navigation.setOptions({
-        headerTitle: restaurantById.name,
-        headerTitleAlign: 'center',
-        headerLeft: () => (
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="arrow-back" size={24} color="black" />
-          </TouchableOpacity>
-        ),
-        headerRight: () => (
-          <TouchableOpacity onPress={handleTrashPress}>
-            <Ionicons name="trash-outline" size={24} color="black" />
-          </TouchableOpacity>
-        ),
-      });
-    }
-  }, [restaurantById]);
+  // useLayoutEffect(() => {
+  //   if (restaurantById && restaurantById.name) {
+  //     navigation.setOptions({
+  //       headerTitle: restaurantById.name,
+  //       headerTitleAlign: 'center',
+  //       headerLeft: () => (
+  //         <TouchableOpacity onPress={() => navigation.goBack()}>
+  //           <Ionicons name="arrow-back" size={24} color="black" />
+  //         </TouchableOpacity>
+  //       ),
+  //       headerRight: () => (
+  //         <TouchableOpacity onPress={handleTrashPress}>
+  //           <Ionicons name="trash-outline" size={24} color="black" />
+  //         </TouchableOpacity>
+  //       ),
+  //     });
+  //   }
+  // }, [restaurantById]);
 
   const handleTrashPress = () => {
     setCount(0);
@@ -119,8 +118,72 @@ const BasketScreen = () => {
     <ScrollView className="flex flex-1 bg-[#ecedef]">
       {/* Item List View */}
       <View className="flex rounded-b-2xl bg-white px-4 py-6">
-      <ItemsList decrementCount={decrementCount}foundMeals={foundMeals}totalPrice={totalPrice}
-      count={count} incrementCount={incrementCount} />
+       {/* Item */}
+       <View className="flex flex-row justify-between items-center">
+          <View className="flex flex-row">
+            <Image
+              source={{ uri: foundMeals.img }}
+              className="w-14 h-14 mr-2"
+              resizeMode="contain"
+            />
+            <View>
+              <Text className="text-lg text-gray-800">{foundMeals.name}</Text>
+              <Text className="text-base font-bold">£{totalPrice}</Text>
+            </View>
+          </View>
+
+          <View className="flex flex-row justify-evenly border h-10 w-24 items-center rounded-full">
+            {count > 1 ? (
+              <TouchableOpacity onPress={decrementCount}>
+                <Text className="text-2xl text-black">—</Text>
+              </TouchableOpacity>
+            ) : (
+              <View>
+                <Text className="text-2xl text-gray-500">—</Text>
+              </View>
+            )}
+
+            <Text className="text-lg">{count}</Text>
+            <TouchableOpacity onPress={incrementCount}>
+              <Text className="text-2xl">+</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Separator */}
+        <View className="border-[0.5px] border-slate-200 my-4" />
+
+        {/* Add More */}
+        <View className="flex flex-row items-center">
+          <AntDesign name="pluscircle" size={24} color="#34bb78" />
+          <Text className="text-[#34bb78] text-base font-semibold ml-4">Add more</Text>
+        </View>
+
+        {/* Separator */}
+        <View className="border-[0.5px] border-slate-200 my-4" />
+
+        {/* Leave Comment */}
+        <View>
+          <TextInput
+            multiline
+            placeholder={'Need cutlery ? Napkins ? Other ? \nLeave a comment...'}
+          />
+        </View>
+
+        {/* Separator */}
+        <View className="border-[0.5px] border-slate-200 my-4" />
+
+        {/* People also added */}
+        <View>
+          <Text className="text-lg font-bold mb-4">People also added</Text>
+          <FlatList
+            data={sauceData}
+            renderItem={renderItem}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
       </View>
 
       {/* Delivery or Pickup */}
@@ -133,7 +196,7 @@ const BasketScreen = () => {
       </View>
       {/* Map View */}
       <View className="flex rounded-2xl bg-white px-4 py-6 mt-2 flex-1">
-      <MapViewComponent streetName={streetName} latitude={latitude} longitude={longitude} />
+          <MapViewComponent streetName={streetName} latitude={latitude} longitude={longitude} />
       </View>
       {/* Place Order */}
       <View className="flex rounded-2xl bg-white py-6 mt-2 flex-1">
@@ -159,11 +222,11 @@ const BasketScreen = () => {
 
         {/* Cash warning */}
         <View className="flex flex-row items-center mb-2 px-4 mt-2">
-        <Checkbox
+        {/* <Checkbox
             value={isChecked}
             onValueChange={setChecked}
             color={isChecked ? '#34BB78' : undefined}
-          />
+          /> */}
           <Text className="ml-2 text-base">
             <Text>Cash order</Text>
             <FontAwesome5 name="exclamation-triangle" size={18} color="#fcb001" />

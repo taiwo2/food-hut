@@ -12,7 +12,7 @@ const ModalAddress = () => {
   const [headerVisible, setHeaderVisible] = useState(false);
   const [containerMargin] = useState(new Animated.Value(40));
 
-  const googleAPI = process.env.REACT_APP_GOOGLE_API_KEY;
+  // const googleAPI = process.env.REACT_APP_GOOGLE_API_KEY;
 
   const toggleHeaderVisibility = () => {
     setHeaderVisible(!headerVisible);
@@ -66,7 +66,7 @@ const ModalAddress = () => {
             handleSelectPalce(details);
           }}
           query={{
-            key: googleAPI,
+            key: "AIzaSyBRZ7mPHeqtH0TzDAiNZD0PJxeQ0HzDX6E",
             language: 'en',
             type: 'address',
           }}

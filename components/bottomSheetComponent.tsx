@@ -28,7 +28,7 @@ const trackData = [
 ];
 
 const BottomSheetComponent = () => {
-  const { totalPrice, foundMeals, count }: any = useAppContext();
+  const { totalPrice, foundMeals, count } = useAppContext();
   const snapPoints = useMemo(() => ['20%', '100%'], []);
   const [progress, setProgress] = useState(0); //Progress of the bar
   const stepInterval = 3 * 60 * 1000; // 3 min in miliseconds
